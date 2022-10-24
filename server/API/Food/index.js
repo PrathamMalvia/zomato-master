@@ -9,8 +9,8 @@ const Router = express.Router();
 
 /* 
 Route       /r
-Des         Get al food based on particular restaurant
-Params      id
+Des         Get all food based on particular restaurant
+Params      _id
 Access      Public
 Method      GET
 */
@@ -44,3 +44,5 @@ Router.get("/r/:category", async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 })
+
+export default Router;
