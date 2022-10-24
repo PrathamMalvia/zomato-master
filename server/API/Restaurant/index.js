@@ -29,7 +29,7 @@ Router.get("/", async (req, res) => {
 /* 
 Route       /
 Des         Get individual restaurant details based on id
-Params      none
+Params      _id
 Access      Public
 Method      GET
 */
