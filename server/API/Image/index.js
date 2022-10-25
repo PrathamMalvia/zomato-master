@@ -21,7 +21,7 @@ Route       /
 Des         Uploads given image to S3 bucket, and saves file link to mongodb
 Params      none
 Access      Public
-Method      GET
+Method      POST
 */
 Router.post("/", upload.single("file"), async (req, res) => {
     try {
