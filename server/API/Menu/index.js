@@ -2,7 +2,7 @@
 import express from "express";
 import passport from "passport";
 
-// Database modal
+// Database model
 import { MenuModel, ImageModel } from "../../database/allModels";
 
 const Router = express.Router();
