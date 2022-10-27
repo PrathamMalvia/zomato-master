@@ -1,7 +1,7 @@
 // Libraries
 import express from "express";
 import { get } from "mongoose";
-import passport from "passport";
+import passport, { authenticate } from "passport";
 
 // Database model
 import { OrderModel } from "../../database/allModels";
@@ -18,7 +18,7 @@ Params      _id
 Access      Public
 Method      GET
 */
-Router.get("/:_id", async (req, res) => {
+Router.get("/:_id", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
         await ValidateUserId(_id);
 
