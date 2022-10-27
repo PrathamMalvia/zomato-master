@@ -1,13 +1,16 @@
 import React from "react";
 
+// HOC
+import HomeLayoutHOC from "./HOC/Home.Hoc";
+
+// Components
+import Temp from "./Components/temp";
+
 function App() {
   return (
-    <div>
-      
-    </div>
-
-
-
+    <>
+      <HomeLayoutHOC path="/" exact component={Temp} />
+    </>
   );
 }
 
