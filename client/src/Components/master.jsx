@@ -1,12 +1,17 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import Delivery from './Delivery';
+
+// Components
+import DeliveryCarousel from './Delivery/DeliveryCarousel';
 
 const Master = () => {
     const { type } = useParams();
 
-
     return (
-        <>{type}</>
+        <div className='my-5'>
+        {type=== "delivery" && <Delivery/>}
+        </div>
     )
 }
 

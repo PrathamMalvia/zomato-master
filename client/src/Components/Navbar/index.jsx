@@ -59,8 +59,8 @@ const LargeNav = () => {
                     </div>
 
                     <div className="ml-28 flex gap-2">
-                        <button className="mr-6 text-gray-500 text-xl hover:text-gray-800">Login</button>
-                        <button className="mr-20 text-gray-500 text-xl hover:text-gray-800">Signup</button>
+                        <button className="mr-6 text-gray-500 text-lg hover:text-gray-800">Login</button>
+                        <button className="mr-20 text-gray-500 text-lg hover:text-gray-800">Signup</button>
                     </div>
                 </div>
 
@@ -72,7 +72,7 @@ const LargeNav = () => {
 
 const Navbar = () => {
     return <>
-        <nav className="p-4 flex bg-white shadow-md w-full items-center">
+        <nav className="p-4 flex bg-white shadow-md lg:shadow-none w-full items-center">
             <MobileNav />
             <LargeNav />
 
