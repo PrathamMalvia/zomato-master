@@ -8,7 +8,7 @@ const DeliverySmCard = ({ image, title }) => {
                     <img
                         src={image}
                         alt='food'
-                        className='w-full h-full object-cover rounded-t-md'
+                        className='w-full h-full object-cover rounded-t-lg'
                     />
                 </div>
 
@@ -29,7 +29,7 @@ const DeliveryLgCard = ({ image, title }) => {
                     <img
                         src={image}
                         alt='food'
-                        className='w-full h-full object-cover rounded-md lg:shadow-lg'
+                        className='w-full h-full object-cover rounded-xl lg:shadow-lg'
                     />
                 </div>
 
