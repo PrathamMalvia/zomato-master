@@ -10,17 +10,17 @@ const NutritionCarousel = () => {
         {
             image:
                 "https://dote.zmtcdn.com/prod/data/admin_assets/images/baf809f0523c43d29f51d1e05f9f46be_1629263595.png?output-format=webp",
-            title: "Protien & Fitness",
+            title: "Protein & Fitness",
         },
         {
             image:
                 "https://dote.zmtcdn.com/prod/data/admin_assets/images/de47fcc91ced4e33b354909e897456e8_1628243615.png?output-format=webp",
-            title: "Sleep & stress",
+            title: "Sleep & Stress",
         },
         {
             image:
                 "https://dote.zmtcdn.com/prod/data/admin_assets/images/89fdc1246c12461db02d853a513ab616_1628243591.png?output-format=webp",
-            title: "Digestion & weight Loss",
+            title: "Digestion & Weight Loss",
         },
         {
             image:

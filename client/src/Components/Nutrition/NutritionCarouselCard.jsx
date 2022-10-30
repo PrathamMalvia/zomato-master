@@ -3,7 +3,7 @@ import React from 'react'
 const NutritionCard = ({ image, title }) => {
     return (
         <>
-            <div className='bg-white shadow w-24 h-full px-3 md:px-4 md:w-56'>
+            <div className='bg-white shadow w-24 h-full px-3 md:px-4 md:w-64'>
                 <div className='w-full h-12 md:h-36'>
                     <img
                         src={image}
@@ -13,7 +13,7 @@ const NutritionCard = ({ image, title }) => {
                 </div>
 
                 <div>
-                    <h3 className='text-sm my-1 text-center font-normal lg:text-lg lg:font-medium'>{title}</h3>
+                    <h3 className='text-sm my-1 text-center font-normal lg:text-xl lg:font-normal'>{title}</h3>
                 </div>
             </div>
         </>
