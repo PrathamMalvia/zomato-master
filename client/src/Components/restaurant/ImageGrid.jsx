@@ -1,5 +1,5 @@
 import React from 'react'
-import { AiOutlineCamera } from "react-icons/ai";
+import { AiOutlineCamera } from "react-icons/ai"
 
 const ImageGrid = (props) => {
     return (
@@ -13,7 +13,7 @@ const ImageGrid = (props) => {
             </div>
 
             <div className='hidden md:flex w-full h-80 flex gap-1'>
-                <div className='w-7/12 h-full overflow-hidden'>
+                <div className='w-full h-full overflow-hidden'>
                     <img
                         src={props.images[0]}
                         alt="restaurant img"
@@ -21,7 +21,7 @@ const ImageGrid = (props) => {
                     />
                 </div>
 
-                <div className='w-1/6 h-full flex flex-col gap-1 overflow-hidden'>
+                <div className='w-1/4 h-full flex flex-col gap-1 overflow-hidden'>
                     <img
                         src={props.images[1]}
                         alt="restaurant img"
@@ -34,7 +34,7 @@ const ImageGrid = (props) => {
                     />
                 </div>
 
-                <div className='w-1/6 h-full flex flex-col gap-1 overflow-hidden'>
+                <div className='w-1/4 h-full flex flex-col gap-1 overflow-hidden'>
                     <div className='w-full h-full relative'>
                         <img
                             src={props.images[3]}

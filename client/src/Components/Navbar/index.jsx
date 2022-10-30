@@ -29,14 +29,14 @@ const LargeNav = () => {
             <div className="hidden lg:inline container px-40 mx-auto">
 
                 <div className="hidden gap-4 w-full items-center justify-between lg:flex ">
-                    <div className="w-28">
+                    <div className="w-44">
                         <img src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png"
                             alt="logo"
                             className="w-full h-full"
                         />
                     </div>
 
-                    <div className="w-3/4 bg-white shadow-md p-3 flex items-center gap-3 border border-gray-200 rounded">
+                    <div className="ml-6 w-3/4 bg-white shadow-md p-3 flex items-center gap-3 border border-gray-200 rounded">
                         <div className="flex items-center gap-2 border-r-2 border-gray-300 pr-2">
                             <span className="text-zomato-400">
                                 <HiLocationMarker />
@@ -58,9 +58,9 @@ const LargeNav = () => {
                         </div>
                     </div>
 
-                    <div className="ml-28 flex gap-2">
-                        <button className="mr-6 text-gray-500 text-lg hover:text-gray-800">Login</button>
-                        <button className="mr-20 text-gray-500 text-lg hover:text-gray-800">Signup</button>
+                    <div className="ml-40 flex gap-2">
+                        <button className="mr-10 text-gray-500 text-lg hover:text-gray-800">Login</button>
+                        <button className="left-0 text-gray-500 text-lg hover:text-gray-800">Signup</button>
                     </div>
                 </div>
 
