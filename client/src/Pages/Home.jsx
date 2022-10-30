@@ -1,11 +1,11 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
 // Components
-import Delivery from './Delivery';
-import Dining from './Dining';
-import NightLife from './NightLife';
-import Nutrition from './Nutrition';
+import Delivery from '../Components/Delivery';
+import Dining from '../Components/Dining';
+import NightLife from '../Components/NightLife';
+import Nutrition from '../Components/Nutrition';
 
 const Master = () => {
     const { type } = useParams();

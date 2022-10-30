@@ -47,13 +47,16 @@ const Delivery = () => {
             durationOfDelivery: 47,
             restaurantReviewValue: 4.1,
         },
-        
+
     ]);
 
     return (
         <>
             <DeliveryCarousel />
             {/* <Brand /> */}
+            <h1 className="text-xl mt-4 mb-2 md:mt-8 md:text-3xl md:font-semibold">
+                Delivery Restaurants in Shashtri Nagar
+            </h1>
             <div className='flex justify-between flex-wrap'>
                 {
                     restaurantList.map((restaurant) => (
