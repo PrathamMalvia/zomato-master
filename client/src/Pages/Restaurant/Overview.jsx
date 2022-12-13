@@ -4,25 +4,53 @@ import { IoMdArrowDropright } from 'react-icons/io';
 import Slider from 'react-slick';
 import ReactStars from 'react-rating-stars-component';
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 // Components
 import MenuCollection from '../../Components/restaurant/MenuCollection';
 import MenuSimilarRestaurantCard from '../../Components/restaurant/MenuSimilarRestaurantCard';
 import { NextArrow, PrevArrow } from '../../Components/CarouselArrow';
 import ReviewCard from '../../Components/restaurant/Reviews/ReviewCard';
+import MapView from '../../Components/restaurant/MapView';
 
 const Overview = () => {
     const { id } = useParams();
 
     const settings = {
-        arrows: true,
-        infinite: true,
+        dots: true,
+        infinite: false,
         speed: 500,
         slidesToShow: 3,
-        slidesToScroll: 1,
+        slidesToScroll: 3,
+        initialSlide: 0,
         nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />
+        prevArrow: <PrevArrow />,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true,
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    initialSlide: 2,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
     };
+
 
     const ratingChanged = (newRating) => {
         console.log(newRating);
@@ -105,6 +133,14 @@ const Overview = () => {
                             activeColor="#ffd700"
                         />
                     </div>
+                    <div className='my-4 w-full md:hidden flex flex-col gap-4'>
+                        <MapView
+                            title="Mumbai Xpress"
+                            phno="+919591041645"
+                            mapLocation={[12.973172142451594, 77.63953593243356]}
+                            address="92, 1st Floor, HAL 2nd Stage, Doopanahalli Main Road, Indiranagar, Bangalore"
+                        />
+                    </div>
                     <div className='my-4 flex flex-col gap-4'>
                         <ReviewCard />
                         <ReviewCard />
@@ -115,32 +151,14 @@ const Overview = () => {
                 </div>
                 <aside
                     style={{ height: "fit-content" }}
-                    className='hidden md:block md:w-4/12 sticky top-2 bg-white p-3 shadow-md'
+                    className='hidden md:flex md:w-4/12 sticky top-2 bg-white p-3 shadow-md flex flex-col gap-4'
                 >
-
-                    <div>
-                        <h4 className='text-xl font-medium'>Call</h4>
-                        <h5 className='text-zomato-400 font-medium'>+918041687275</h5>
-
-                    </div>
-                    <div>
-                        <h4 className='text-xl font-medium'>Direction</h4>
-
-                        <div className='w-full h-48'>
-                            <MapContainer center={[12.973172142451594, 77.63953593243356]} zoom={13} scrollWheelZoom={false}>
-                                <TileLayer
-                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                />
-                                <Marker position={[12.973172142451594, 77.63953593243356]}>
-                                    <Popup>
-                                        A pretty CSS3 popup. <br /> Easily customizable.
-                                    </Popup>
-                                </Marker>
-                            </MapContainer>
-                        </div>
-
-                    </div>
+                    <MapView
+                        title="Mumbai Xpress"
+                        phno="+919591041645"
+                        mapLocation={[12.973172142451594, 77.63953593243356]}
+                        address="92, 1st Floor, HAL 2nd Stage, Doopanahalli Main Road, Indiranagar, Bangalore"
+                    />
                 </aside>
             </div>
 
