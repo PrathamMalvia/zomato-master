@@ -1,8 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
-import Rating from 'react-rating-stars-component';
+import { Fragment, useState } from 'react'
+import { FcGoogle } from "react-icons/fc"
 
-export default function ReviewModal({ isOpen, setIsOpen, handleRating, ...props }) {
+export default function SignUp({ isOpen, setIsOpen }) {
 
     function closeModal() {
         setIsOpen(false)
@@ -10,7 +10,6 @@ export default function ReviewModal({ isOpen, setIsOpen, handleRating, ...props 
 
     return (
         <>
-
             <Transition appear show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={closeModal}>
                     <Transition.Child
@@ -41,55 +40,52 @@ export default function ReviewModal({ isOpen, setIsOpen, handleRating, ...props 
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        Add Review
-                                    </Dialog.Title>
-                                    <div className="mt-2 flex flex-col gap-2">
-                                        <div className='flex items-center gap-3'>
-                                            <div className='flex items-center gap-2'>
-                                                <input type="radio" name="review" id='dinning' />
-                                                <label htmlFor="dinning">Dinning</label>
-                                            </div>
-                                            <div className='flex items-center gap-2'>
-                                                <input type="radio" name="review" id='delivery' />
-                                                <label htmlFor="delivery">Delivery</label>
-                                            </div>
-                                        </div>
-                                        <Rating count={5} size={24} onChange={handleRating} />
 
-                                        <form className='flex flex-col gap-4'>
+                                    </Dialog.Title>
+                                    <div className="mt-2 flex flex-col gap-3 w-full">
+                                        <button className='flex justify-center items-center gap-2 py-2 rounded-lg w-full border border-gray-400 bg-white text-gray-700 hover:bg-gray-100'>
+                                            Sign up With Google <FcGoogle />
+                                        </button>
+
+                                        <form className='flex flex-col gap-3'>
                                             <div className='flex flex-col gap-2'>
-                                                <label htmlFor="subject">Subject</label>
+                                                <label htmlFor="fullname">Full Name</label>
                                                 <input
                                                     type="text"
-                                                    id='subject'
-                                                    placeholder='Amazing food'
+                                                    id='fullname'
+                                                    placeholder='John Doe'
                                                     className='w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400'
                                                 />
                                             </div>
 
                                             <div className='flex flex-col gap-2'>
-                                                <label htmlFor="reviewText">Review Text</label>
-                                                <textarea
-                                                    id='reviewText'
-                                                    placeholder='Amazing food'
-                                                    rows="5"
+                                                <label htmlFor="email">Email</label>
+                                                <input
+                                                    type="email"
+                                                    id='email'
+                                                    placeholder='example@xyz.com'
                                                     className='w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400'
-                                                >
-                                                </textarea>
+                                                />
+                                            </div>
+
+                                            <div className='flex flex-col gap-2'>
+                                                <label htmlFor="password">Password</label>
+                                                <input
+                                                    type="password"
+                                                    id='password'
+                                                    placeholder='********'
+                                                    className='w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400'
+                                                />
+                                            </div>
+
+                                            <div className='w-full text-center bg-zomato-400 text-white py-2 rounded-lg'>
+                                                Sign up
                                             </div>
                                         </form>
 
                                     </div>
 
-                                    <div className="mt-4">
-                                        <button
-                                            type="button"
-                                            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                            onClick={closeModal}
-                                        >
-                                            Submit
-                                        </button>
-                                    </div>
+
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>

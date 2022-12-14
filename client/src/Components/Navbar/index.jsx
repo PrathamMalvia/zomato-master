@@ -1,10 +1,18 @@
 import React from "react";
+import { useState } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { RiSearch2Line } from "react-icons/ri";
 
-const MobileNav = () => {
+// Components
+import SignIn from "../Auth/SignIn";
+import SignUp from "../Auth/SignUp";
+// import UserDropDown from "./UserDropDown";
+
+const MobileNav = ({ SignIn, SignUp }) => {
+    const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+
     return (
         <div className="flex w-full items-center justify-between lg:hidden">
             <div className="w-28">
@@ -13,17 +21,30 @@ const MobileNav = () => {
                     className="w-full h-full"
                 />
             </div>
-            <div className="flex items-center gap-3">
-                <button className="bg-zomato-400 text-white py-2 px-3 rounded-full">Use App</button>
-                <span className="border p-2 border-gray-300 text-zomato-400 rounded-full">
+            <div className="flex items-center gap-3 relative">
+                <button className="bg-zomato-400 text-white py-2 px-3 rounded-full">
+                    Use App
+                </button>
+                <span
+                    onClick={() => setIsDropDownOpen((prev) => !prev)}
+                    className="border p-2 border-gray-300 text-zomato-400 rounded-full">
                     <FaUserAlt />
                 </span>
+                {
+                    isDropDownOpen && (
+                        <div className="absolute shadow-lg py-3 -bottom-20 -right-4 w-full bg-white z-20 flex flex-col gap-2">
+                            <button onClick={SignIn}>Sign in</button>
+                            <button onClick={SignUp}>Sign up</button>
+                        </div>
+                    )
+                }
+
             </div>
         </div>
     )
 }
 
-const LargeNav = () => {
+const LargeNav = ({ SignIn, SignUp }) => {
     return (
         <>
             <div className="hidden lg:inline container px-40 mx-auto">
@@ -59,8 +80,16 @@ const LargeNav = () => {
                     </div>
 
                     <div className="ml-40 flex gap-2">
-                        <button className="mr-10 text-gray-500 text-lg hover:text-gray-800">Login</button>
-                        <button className="left-0 text-gray-500 text-lg hover:text-gray-800">Signup</button>
+                        <button
+                            onClick={SignIn}
+                            className="mr-10 text-gray-500 text-lg hover:text-gray-800">
+                            Login
+                        </button>
+                        <button
+                            onClick={SignUp}
+                            className="left-0 text-gray-500 text-lg hover:text-gray-800">
+                            Signup
+                        </button>
                     </div>
                 </div>
 
@@ -71,13 +100,24 @@ const LargeNav = () => {
 
 
 const Navbar = () => {
-    return <>
-        <nav className="p-4 flex bg-white shadow-md lg:shadow-none w-full items-center">
-            <MobileNav />
-            <LargeNav />
+    const [openSignin, setOpenSignin] = useState(false);
+    const [openSignup, setOpenSignup] = useState(false);
 
-        </nav>
-    </>
+    const openSignInModal = () => setOpenSignin(true);
+    const openSignUpModal = () => setOpenSignup(true);
+
+    return (
+        <>
+            <SignIn isOpen={openSignin} setIsOpen={setOpenSignin} />
+            <SignUp isOpen={openSignup} setIsOpen={setOpenSignup} />
+
+            <nav className="p-4 flex bg-white shadow-md lg:shadow-none w-full items-center">
+                <MobileNav SignIn={openSignInModal} SignUp={openSignUpModal} />
+                <LargeNav SignIn={openSignInModal} SignUp={openSignUpModal} />
+
+            </nav>
+        </>
+    )
 }
 
 export default Navbar;
