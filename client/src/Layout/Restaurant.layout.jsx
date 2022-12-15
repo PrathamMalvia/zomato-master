@@ -9,6 +9,7 @@ import ImageGrid from '../Components/restaurant/ImageGrid';
 import RestaurantInfo from '../Components/restaurant/RestaurantInfo';
 import InfoButtons from '../Components/restaurant/InfoButtons';
 import TabContainer from '../Components/restaurant/Tabs';
+import CartContainer from '../Components/Cart/CartContainer';
 
 const RestaurantLayout = (props) => {
     return (
@@ -55,8 +56,8 @@ const RestaurantLayout = (props) => {
                     </TabContainer>
                 </div>
                 {props.children}
-
             </div>
+            <CartContainer />
 
 
 
