@@ -4,7 +4,7 @@ import { RiDirectionLine, RiShareForwardLine } from "react-icons/ri"
 import { BiBookmarkPlus } from "react-icons/bi"
 
 // Components
-import RestaurantNavbar from "../Components/Navbar/restaurantNavbar";
+import RestaurantNavbar from "../Components/Navbar/RestaurantNavbar";
 import ImageGrid from '../Components/restaurant/ImageGrid';
 import RestaurantInfo from '../Components/restaurant/RestaurantInfo';
 import InfoButtons from '../Components/restaurant/InfoButtons';
