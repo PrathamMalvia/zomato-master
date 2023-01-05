@@ -1,5 +1,8 @@
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { IoMdArrowDropright } from 'react-icons/io';
 import Slider from 'react-slick';
 import ReactStars from 'react-rating-stars-component';
@@ -10,8 +13,12 @@ import MenuSimilarRestaurantCard from '../../Components/restaurant/MenuSimilarRe
 import { NextArrow, PrevArrow } from '../../Components/CarouselArrow';
 import ReviewCard from '../../Components/restaurant/Reviews/ReviewCard';
 import MapView from '../../Components/restaurant/MapView';
+import { getImage } from '../../Redux/Reducer/Image/Image.action';
 
 const Overview = () => {
+    const [menuImage, setMenuImages] = useState({ images: [] });
+    const [Reviews, setReviews] = useState([]);
+
     const { id } = useParams();
 
     const settings = {
@@ -51,6 +58,20 @@ const Overview = () => {
         ],
     };
 
+    const reduxState = useSelector(
+        (globalStore) => globalStore.restaurant.selectedRestaurant.restaurant
+    );
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (reduxState) {
+            dispatch(getImage(reduxState?.menuImage)).then((data) => {
+                const images = [];
+                data.payload.image.images.map(({ location }) => images.push(location));
+                setMenuImages(images);
+            });
+        }
+    }, []);
 
     const ratingChanged = (newRating) => {
         console.log(newRating);
@@ -74,12 +95,7 @@ const Overview = () => {
                         <MenuCollection
                             menuTitle="Menu"
                             pages="3"
-                            image={[
-                                "https://b.zmtcdn.com/data/menus/060/19332060/d30cb92d4d473f5c476578f97ae5cdbb.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-                                "https://b.zmtcdn.com/data/menus/246/19663246/8d5196be60e4b9eb6b965c80dff81603.png?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-                                "https://b.zmtcdn.com/data/menus/246/19663246/d9d67b38f6d6d9fbc2bf292d45347aa3.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-
-                            ]}
+                            image={menuImage}
                         />
                     </div>
                     <h4 className='text-lg font-medium my-4'>Cuisines</h4>

@@ -1,4 +1,8 @@
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { TiStarOutline } from "react-icons/ti"
 import { RiDirectionLine, RiShareForwardLine } from "react-icons/ri"
 import { BiBookmarkPlus } from "react-icons/bi"
@@ -11,58 +15,79 @@ import InfoButtons from '../Components/restaurant/InfoButtons';
 import TabContainer from '../Components/restaurant/Tabs';
 import CartContainer from '../Components/Cart/CartContainer';
 
+// Redux actions
+import { getSpecificRestaurant } from '../Redux/Reducer/restaurant/restaurant.action';
+import { getImage } from '../Redux/Reducer/Image/Image.action';
+
 const RestaurantLayout = (props) => {
-    return (
-        <>
-            <RestaurantNavbar />
-            <div className="container mx-auto px-4 lg:px-40">
-                <ImageGrid images={[
-                    'https://b.zmtcdn.com/data/pictures/chains/6/50036/db2271e47065db0a611237066279297b_featured_v2.jpg?fit=around|771.75:416.25&crop=771.75:416.25;*,*',
-                    'https://b.zmtcdn.com/data/pictures/chains/6/50036/db2271e47065db0a611237066279297b_featured_v2.jpg?fit=around|771.75:416.25&crop=771.75:416.25;*,*',
-                    'https://b.zmtcdn.com/data/pictures/chains/6/50036/db2271e47065db0a611237066279297b_featured_v2.jpg?fit=around|771.75:416.25&crop=771.75:416.25;*,*',
-                    'https://b.zmtcdn.com/data/pictures/chains/6/50036/db2271e47065db0a611237066279297b_featured_v2.jpg?fit=around|771.75:416.25&crop=771.75:416.25;*,*',
-                    'https://b.zmtcdn.com/data/pictures/chains/6/50036/db2271e47065db0a611237066279297b_featured_v2.jpg?fit=around|771.75:416.25&crop=771.75:416.25;*,*',
-                ]}
-                />
-                <RestaurantInfo
-                    name="Al-Bek"
-                    restaurantRating="4.1"
-                    deliveryRating="4.1"
-                    cuisine="Mughlai, Arabian, North Indian, Chinese, Seafood"
-                    address="Rajajinagar, Mumbai"
-                />
+    const [restaurant, setRestaurant] = useState({
+        images: [],
+        name: "",
+        cuisine: "",
+        address: "",
+    });
+    const { id } = useParams();
+    const dispatch = useDispatch();
 
-                <div className='my-4 flex flex-wrap gap-3'>
-                    <InfoButtons isActive >
-                        <TiStarOutline /> Add Review
-                    </InfoButtons>
+    useEffect(() => {
+        dispatch(getSpecificRestaurant(id)).then((data) => {
+          setRestaurant((prev) => ({
+            ...prev,
+            ...data.payload.restaurant,
+          }));
+    
+          dispatch(getImage(data.payload.restaurant.photos)).then((data) =>
+            setRestaurant((prev) => ({ ...prev, ...data.payload.image }))
+          );
+        });
+    
+      }, []);
 
-                    <InfoButtons  >
-                        <RiDirectionLine /> Direction
-                    </InfoButtons>
+return (
+    <>
+        <RestaurantNavbar />
+        <div className="container mx-auto px-4 lg:px-40">
+            <ImageGrid images={restaurant.images}
+            />
+            <RestaurantInfo
+                name={restaurant.name}
+                restaurantRating={restaurant.rating || 0}
+                deliveryRating={restaurant.rating || 0}
+                cuisine={restaurant.cuisine}
+                address={restaurant.address}
+            />
 
-                    <InfoButtons  >
-                        <BiBookmarkPlus /> Bookmark
-                    </InfoButtons>
+            <div className='my-4 flex flex-wrap gap-3'>
+                <InfoButtons isActive >
+                    <TiStarOutline /> Add Review
+                </InfoButtons>
 
-                    <InfoButtons  >
-                        <RiShareForwardLine /> Share
-                    </InfoButtons>
+                <InfoButtons  >
+                    <RiDirectionLine /> Direction
+                </InfoButtons>
 
-                </div>
+                <InfoButtons  >
+                    <BiBookmarkPlus /> Bookmark
+                </InfoButtons>
 
-                <div className='my-4'>
-                    <TabContainer>
-                    </TabContainer>
-                </div>
-                {props.children}
+                <InfoButtons  >
+                    <RiShareForwardLine /> Share
+                </InfoButtons>
+
             </div>
-            <CartContainer />
+
+            <div className='my-4'>
+                <TabContainer>
+                </TabContainer>
+            </div>
+            {props.children}
+        </div>
+        <CartContainer />
 
 
 
-        </>
-    )
+    </>
+)
 }
 
 export default RestaurantLayout;
