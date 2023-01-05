@@ -50,18 +50,18 @@ routeConfig(passport);
 
 // Application Route
 zomato.use("/auth", Auth);
-zomato.use("/restaurant", Restaurant);
-zomato.use("/food", Food);
-zomato.use("/menu", Menu);
-zomato.use("/image", Image);
-zomato.use("/order", Order);
+zomato.use("/restaurants", Restaurant);
+zomato.use("/foods", Food);
+zomato.use("/menus", Menu);
+zomato.use("/images", Image);
+zomato.use("/orders", Order);
 zomato.use("/reviews", Review);
-zomato.use("/user", User);
+zomato.use("/users", User);
 zomato.use("/mail", MailService);
 
 zomato.get("/", (req, res) => res.json({ message: "SetUp Success" }));
 
-zomato.listen(99, () =>
+zomato.listen(4000, () =>
   ConnectDB()
     .then(() => console.log("Server is running 🚀"))
     .catch(() => console.log("Server is running, but database connection failed..."))

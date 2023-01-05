@@ -4,7 +4,7 @@ import { get } from "mongoose";
 import passport from "passport";
 
 // Database model
-import { UserModel } from "../../database/allModels";
+import { UserModel } from "../../database/AllModels";
 
 // Validation
 import { ValidateUserId } from "../../validation/user";
