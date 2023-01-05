@@ -77,6 +77,10 @@ const Overview = () => {
         console.log(newRating);
     };
 
+    const getLatLong = (mapAddress) => {
+        return mapAddress?.split(",").map((item) => parseFloat(item));
+    };
+
     return (
         <>
             <div className='flex flex-col md:flex-row relative'>
@@ -100,20 +104,16 @@ const Overview = () => {
                     </div>
                     <h4 className='text-lg font-medium my-4'>Cuisines</h4>
                     <div className='flex flex-wrap gap-2'>
-                        <span className='border border-gray-600 text-blue-600 px-2 py-1 rounded-full'>
-                            North Indian
-                        </span>
-                        <span className='border border-gray-600 text-blue-600 px-2 py-1 rounded-full'>
-                            Mughlai
-                        </span>
-                        <span className='border border-gray-600 text-blue-600 px-2 py-1 rounded-full'>
-                            Chinese
-                        </span>
+                        {reduxState?.cuisine.map((data) => (
+                            <span className="border border-gray-600 text-blue-600 px-2 py-1 rounded-full">
+                                {data}
+                            </span>
+                        ))}
                     </div>
 
                     <div className='my-4'>
                         <h4 className='text-lg font-medium'>Average Cost</h4>
-                        <h6>₹100 for one order (approx.)</h6>
+                        <h6>{reduxState?.averageCost} for one order (approx.)</h6>
                         <small className='text-gray-500'>Exclusive of applicable taxes and charges, if any</small>
                     </div>
 
@@ -157,10 +157,10 @@ const Overview = () => {
                     </div>
                     <div className='my-4 w-full md:hidden flex flex-col gap-4'>
                         <MapView
-                            title="Mumbai Xpress"
-                            phno="+919591041645"
-                            mapLocation={[12.973172142451594, 77.63953593243356]}
-                            address="92, 1st Floor, HAL 2nd Stage, Doopanahalli Main Road, Indiranagar, Bangalore"
+                            title={reduxState?.name}
+                            phno={`+91${reduxState?.contactNumber}`}
+                            mapLocation={getLatLong(reduxState?.mapLocation)}
+                            address={reduxState?.address}
                         />
                     </div>
                     <div className='my-4 flex flex-col gap-4'>
@@ -176,10 +176,10 @@ const Overview = () => {
                     className='hidden md:flex md:w-4/12 sticky top-2 bg-white p-3 shadow-md flex flex-col gap-4'
                 >
                     <MapView
-                        title="Mumbai Xpress"
-                        phno="+919591041645"
-                        mapLocation={[12.973172142451594, 77.63953593243356]}
-                        address="92, 1st Floor, HAL 2nd Stage, Doopanahalli Main Road, Indiranagar, Bangalore"
+                        title={reduxState?.name}
+                        phno={`+91${reduxState?.contactNumber}`}
+                        mapLocation={getLatLong(reduxState?.mapLocation)}
+                        address={reduxState?.address}
                     />
                 </aside>
             </div>
