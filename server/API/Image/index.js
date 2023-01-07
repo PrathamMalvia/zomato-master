@@ -4,7 +4,7 @@ import passport from "passport";
 import multer from "multer";
 
 // Database model
-import { ImageModel } from "../../database/AllModels";
+import { ImageModel } from "../../database/AllModals";
 
 // Utilities
 import { s3Upload } from "../../Utils/AWS/s3";

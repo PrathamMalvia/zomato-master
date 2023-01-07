@@ -4,7 +4,7 @@ import { get } from "mongoose";
 import passport, { authenticate } from "passport";
 
 // Database model
-import { OrderModel } from "../../database/AllModels";
+import { OrderModel } from "../../database/AllModals";
 
 // Validation
 import { ValidateUserId } from "../../validation/order";

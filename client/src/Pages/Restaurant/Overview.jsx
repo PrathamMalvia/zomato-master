@@ -13,7 +13,9 @@ import MenuSimilarRestaurantCard from '../../Components/restaurant/MenuSimilarRe
 import { NextArrow, PrevArrow } from '../../Components/CarouselArrow';
 import ReviewCard from '../../Components/restaurant/Reviews/ReviewCard';
 import MapView from '../../Components/restaurant/MapView';
+
 import { getImage } from '../../Redux/Reducer/Image/Image.action';
+import { getReviews } from '../../Redux/Reducer/Reviews/reviews.action';
 
 const Overview = () => {
     const [menuImage, setMenuImages] = useState({ images: [] });
@@ -65,11 +67,15 @@ const Overview = () => {
 
     useEffect(() => {
         if (reduxState) {
-            dispatch(getImage(reduxState?.menuImage)).then((data) => {
-                const images = [];
-                data.payload.image.images.map(({ location }) => images.push(location));
-                setMenuImages(images);
-            });
+            dispatch(getImage(reduxState?.menuImage))
+                .then((data) => {
+                    const images = [];
+                    data.payload.image.images.map(({ location }) => images.push(location));
+                    setMenuImages(images);
+                });
+
+            dispatch(getReviews(reduxState?._id))
+                .then(data => console.log({ data }))
         }
     }, []);
 
@@ -154,6 +160,11 @@ const Overview = () => {
                             size={24}
                             activeColor="#ffd700"
                         />
+                        {Reviews.map((reviewData) => (
+                            <ReviewCard {...reviewData} />
+                        ))}
+
+
                     </div>
                     <div className='my-4 w-full md:hidden flex flex-col gap-4'>
                         <MapView

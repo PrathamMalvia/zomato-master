@@ -8,7 +8,7 @@ import passport from "passport";
 import { UserModel } from "../../database/user"
 
 // Validation
-import { ValidateSignup,ValidateSignin } from "../../validation/auth";
+import { ValidateSignup, ValidateSignin } from "../../validation/auth";
 
 const Router = express.Router();
 
@@ -32,7 +32,7 @@ Router.post("/signup", async (req, res) => {
         const token = newUser.generateJwtToken();
 
         // return
-        return res.status(200).json({ token: token, status: "success" });
+        return res.status(200).json({ token: token, user: newUser, status: "success" });
     } catch (error) {
         return res.status(500).json({ error: error.message })
     }

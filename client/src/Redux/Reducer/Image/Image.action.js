@@ -8,7 +8,7 @@ export const getImage = (_id) => async (dispatch) => {
         const Image = await axios(
             {
                 method: "GET",
-                url: `http://localhost:99/image/${_id}`,
+                url: `http://localhost:4000/image/${_id}`,
             }
         )
 

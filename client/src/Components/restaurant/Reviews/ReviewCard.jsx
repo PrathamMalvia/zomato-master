@@ -1,7 +1,22 @@
 import React from 'react'
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { TiStarFullOutline } from 'react-icons/ti';
+import { useDispatch } from 'react-redux';
+import { getUser } from '../../../Redux/Reducer/User/user.action';
+import dayjs from "dayjs";
 
-const ReviewCard = () => {
+const ReviewCard = (props) => {
+    const [user, setUser] = useState({});
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getUser(props.user)).then((data) =>
+            // setUser(data.payload.user.user.user)
+            console.log(data)
+        )
+    }, [])
+
     return (
         <>
             <div className='my-3 flex flex-col gap-3'>
@@ -14,7 +29,7 @@ const ReviewCard = () => {
                             />
                         </div>
                         <div className='flex flex-col'>
-                            <h3 className='text-lg font-semibold'>Pratham Malvia</h3>
+                            <h3 className='text-lg font-semibold'>{user?.fullname}</h3>
                             <small className='text-gray-500'>5 Reviews &#8226; 3 Followers</small>
                         </div>
                     </div>
@@ -25,16 +40,12 @@ const ReviewCard = () => {
                         <span className='text-white text-xs bg-green-700 px-2 py-1 rounded-lg flex items-center'>
                             3<TiStarFullOutline />
                         </span>
-                        <h5 className='font-regular uppercase'>Delivery</h5>
-                        <small className='text-gray-500'>3 days ago</small>
+                        <h5 className='font-regular uppercase'>{props.isRestaurantReview ? "Dining" : "Delivery"}</h5>
+                        <small className='text-gray-500'>{dayjs(props.createdAt).format("DD MM YYYY")}</small>
                     </div>
                     <div className='w-full'>
                         <p className='w-full text-gray-600 font-light text-base'>
-                            Ambience - We visited their Kormangla outlet. It's a small cafe-like setting, vibrant in colour and lively ambience.
-                            🔹Food - Habibi Falafel is serving Authentic vegetarian Middle Eastern 🥘 food. Delivering till 3 am!!!!
-                            We tried Falafel Roll, Pita Chips 🍟 , Rice Falafel Plate, Falafel Burger and Baklava.
-                            Service timing is less, you don't have to wait much after ordering your food. All the food was freshly prepared in front of your eyes and hygiene was maintained by staff.
-                            Taste-wise authentic middle eastern food, nothing to complain about.
+                            {props.reviewText}
                         </p>
                     </div>
                 </div>

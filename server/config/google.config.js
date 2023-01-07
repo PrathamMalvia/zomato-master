@@ -5,7 +5,7 @@ dotenv.config({
     path: require("path").resolve(__dirname, "../.env"),
 });
 
-import { UserModel } from "../database/AllModels";
+import { UserModel } from "../database/AllModals";
 
 const Googlestrategy = googleOAuth.Strategy;
 

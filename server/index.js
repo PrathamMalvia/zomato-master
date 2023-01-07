@@ -51,12 +51,12 @@ routeConfig(passport);
 // Application Route
 zomato.use("/auth", Auth);
 zomato.use("/restaurants", Restaurant);
-zomato.use("/foods", Food);
-zomato.use("/menus", Menu);
+zomato.use("/food", Food);
+zomato.use("/menu", Menu);
 zomato.use("/images", Image);
 zomato.use("/orders", Order);
 zomato.use("/reviews", Review);
-zomato.use("/users", User);
+zomato.use("/user", User);
 zomato.use("/mail", MailService);
 
 zomato.get("/", (req, res) => res.json({ message: "SetUp Success" }));

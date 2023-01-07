@@ -1,4 +1,7 @@
 import React from 'react'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux"
 import { AiOutlineCompass } from "react-icons/ai";
 import { BiTimeFive } from "react-icons/bi";
 
@@ -7,7 +10,22 @@ import FloatMenuBtn from '../../Components/restaurant/Order-Online/FloatMenuBtn'
 import MenuListContainer from '../../Components/restaurant/Order-Online/MenuListContainer';
 import FoodList from '../../Components/restaurant/Order-Online/FoodList';
 
+// redux actions
+import { getFoodList } from "../../Redux/Reducer/Food/Food.action"
+
 const OrderOnline = () => {
+    const [menu, setMenu] = useState([]);
+
+    const reduxState = useSelector((globalStore) => globalStore.restaurant.selectedRestaurant.restaurant)
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        reduxState &&
+            dispatch(getFoodList(reduxState.menu)).then((data) =>
+                setMenu(data.payload.menus.menus));
+    }, [reduxState])
+
     return (
         <>
             <div className='w-full h-screen flex '>
@@ -28,46 +46,9 @@ const OrderOnline = () => {
 
                     <section className='flex h-screen overflow-y-scroll flex-col gap-3 md:gap-5'>
 
-                        <FoodList
-                            title="Recommended"
-                            items={[
-                                {
-                                    title: "Panner kadai",
-                                    image: "https://b.zmtcdn.com/data/dish_photos/75b/e78bb4f0b8aae1f563f2c1cd67dbc75b.jpg?",
-                                    price: "1000",
-                                    rating: 3,
-                                    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt nemo non quidem aspernatur vel, voluptatum tenetur, beatae fugit eligendi minus impedit? Rerum quisquam autem amet deleniti laudantium dicta molestiae eius.",
-                                },
-                                {
-                                    title: "Chicken Chilli",
-                                    image: "https://b.zmtcdn.com/data/dish_photos/75b/e78bb4f0b8aae1f563f2c1cd67dbc75b.jpg?",
-                                    price: "1000",
-                                    rating: 3,
-                                    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt nemo non quidem aspernatur vel, voluptatum tenetur, beatae fugit eligendi minus impedit? Rerum quisquam autem amet deleniti laudantium dicta molestiae eius.",
-                                },
-                            ]}
-                        />
-
-                        <FoodList
-                            title="Pizza"
-                            items={[
-                                {
-                                    title: "Panner kadai",
-                                    image: "https://b.zmtcdn.com/data/dish_photos/75b/e78bb4f0b8aae1f563f2c1cd67dbc75b.jpg?",
-                                    price: "1000",
-                                    rating: 3,
-                                    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt nemo non quidem aspernatur vel, voluptatum tenetur, beatae fugit eligendi minus impedit? Rerum quisquam autem amet deleniti laudantium dicta molestiae eius.",
-                                },
-                                {
-                                    title: "Chicken Chilli",
-                                    image: "https://b.zmtcdn.com/data/dish_photos/75b/e78bb4f0b8aae1f563f2c1cd67dbc75b.jpg?",
-                                    price: "1000",
-                                    rating: 3,
-                                    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt nemo non quidem aspernatur vel, voluptatum tenetur, beatae fugit eligendi minus impedit? Rerum quisquam autem amet deleniti laudantium dicta molestiae eius.",
-                                },
-                            ]}
-                        />
-
+                        {menu.map((item) => (
+                            <FoodList key={item._id} {...item} />
+                        ))}
 
                     </section>
                 </div>

@@ -3,7 +3,7 @@ import express from "express";
 import passport from "passport";
 
 // Database model
-import { MenuModel, ImageModel } from "../../database/AllModels";
+import { MenuModel, ImageModel } from "../../database/AllModals";
 
 // Validation
 import { ValidateRestaurantId } from "../../validation/food";
@@ -22,7 +22,7 @@ Router.get("/list/:_id", async (req, res) => {
         await ValidateRestaurantId(req.params);
 
         const { _id } = req.params;
-        const menus = await MenuModel.findOne(_id);
+        const menus = await MenuModel.findById(_id);
 
         return res.json({ menus });
     } catch (error) {
@@ -42,7 +42,7 @@ Router.get("/image/:_id", async (req, res) => {
         await ValidateRestaurantId(req.params);
 
         const { _id } = req.params;
-        const menus = await ImageModel.findOne(_id);
+        const menus = await ImageModel.findById(_id);
 
         return res.json({ menus });
     } catch (error) {
