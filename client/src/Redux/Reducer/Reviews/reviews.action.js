@@ -25,10 +25,11 @@ export const postReviews = (reviewData) => async (dispatch) => {
             {
                 method: "POST",
                 url: `http://localhost:4000/reviews/new`,
+                data: { reviewData }
             }
         )
 
-        return dispatch({ type: POST_REVIEW, payload: reviewData});
+        return dispatch({ type: POST_REVIEW, payload: reviewData });
     } catch (error) {
         return dispatch({ type: "ERROR", payload: error });
 

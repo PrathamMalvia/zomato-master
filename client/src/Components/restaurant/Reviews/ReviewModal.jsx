@@ -1,13 +1,62 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import Rating from 'react-rating-stars-component';
+import { useParams } from 'react-router-dom';
+import { useDispatch } from "react-redux";
 
-export default function ReviewModal({ isOpen, setIsOpen, handleRating, ...props }) {
+import { postReviews } from '../../../Redux/Reducer/Reviews/reviews.action';
+
+export default function ReviewModal({ isOpen, setIsOpen, ...props }) {
+
+    const [reviewData, setReviewData] = useState(
+        {
+            subject: "",
+            reviewText: "",
+            isRestaurantReview: false,
+            isFoodReview: false,
+            rating: 0,
+        }
+    );
+
+    const { id } = useParams();
+    const dispatch = useDispatch();
+
+    const handleChange = (e) =>
+        setReviewData((prev) => ({ ...prev, [e.target.id]: e.target.value }))
 
     function closeModal() {
         setIsOpen(false)
     }
 
+    const handleRating = (rating) => {
+        setReviewData((prev) => ({ ...prev, rating }))
+    }
+
+    const toggleDining = () => {
+        setReviewData((prev) =>
+            ({ ...prev, isFoodReview: false, isRestaurantReview: !reviewData.isRestaurantReview }))
+    }
+
+    const toggleDelivery = () => {
+        setReviewData((prev) =>
+            ({ ...prev, isRestaurantReview: false, isFoodReview: !reviewData.isFoodReview }))
+    }
+
+    const submit = () => {
+        dispatch(postReviews({
+            ...reviewData, restaurant: id
+        }))
+        setReviewData(
+            {
+                subject: "",
+                reviewText: "",
+                isRestaurantReview: false,
+                isFoodReview: false,
+                rating: 0,
+            }
+        )
+        closeModal();
+    }
     return (
         <>
 
@@ -46,15 +95,32 @@ export default function ReviewModal({ isOpen, setIsOpen, handleRating, ...props 
                                     <div className="mt-2 flex flex-col gap-2">
                                         <div className='flex items-center gap-3'>
                                             <div className='flex items-center gap-2'>
-                                                <input type="radio" name="review" id='dinning' />
+                                                <input
+                                                    type="radio"
+                                                    name="review"
+                                                    id='dinning'
+                                                    checked={reviewData.isRestaurantReview}
+                                                    onChange={toggleDining}
+                                                />
                                                 <label htmlFor="dinning">Dinning</label>
                                             </div>
                                             <div className='flex items-center gap-2'>
-                                                <input type="radio" name="review" id='delivery' />
+                                                <input
+                                                    type="radio"
+                                                    name="review"
+                                                    id='delivery'
+                                                    checked={reviewData.isFoodReview}
+                                                    onChange={toggleDelivery}
+                                                />
                                                 <label htmlFor="delivery">Delivery</label>
                                             </div>
                                         </div>
-                                        <Rating count={5} size={24} onChange={handleRating} />
+                                        <Rating
+                                            count={5}
+                                            size={24}
+                                            value={reviewData.rating}
+                                            onChange={handleRating}
+                                        />
 
                                         <form className='flex flex-col gap-4'>
                                             <div className='flex flex-col gap-2'>
@@ -63,6 +129,8 @@ export default function ReviewModal({ isOpen, setIsOpen, handleRating, ...props 
                                                     type="text"
                                                     id='subject'
                                                     placeholder='Amazing food'
+                                                    value={reviewData.subject}
+                                                    onChange={handleChange}
                                                     className='w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400'
                                                 />
                                             </div>
@@ -72,6 +140,8 @@ export default function ReviewModal({ isOpen, setIsOpen, handleRating, ...props 
                                                 <textarea
                                                     id='reviewText'
                                                     placeholder='Amazing food'
+                                                    value={reviewData.reviewText}
+                                                    onChange={handleChange}
                                                     rows="5"
                                                     className='w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400'
                                                 >
@@ -85,7 +155,7 @@ export default function ReviewModal({ isOpen, setIsOpen, handleRating, ...props 
                                         <button
                                             type="button"
                                             className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                            onClick={closeModal}
+                                            onClick={submit}
                                         >
                                             Submit
                                         </button>

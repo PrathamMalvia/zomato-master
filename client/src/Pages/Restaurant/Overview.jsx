@@ -75,7 +75,7 @@ const Overview = () => {
                 });
 
             dispatch(getReviews(reduxState?._id))
-                .then(data => console.log({ data }))
+                .then((data) => setReviews(data.payload.reviews))
         }
     }, []);
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // redux types
-import { GET_USER, AUTH_USER } from "./user.type";
+import { GET_USER, SELF } from "./user.type";
 
 export const getUser = (_id) => async (dispatch) => {
     try {
@@ -12,7 +12,7 @@ export const getUser = (_id) => async (dispatch) => {
             }
         )
 
-        return dispatch({ payload: User.data });
+        return dispatch({ type: GET_USER, payload: User.data });
     } catch (error) {
         return dispatch({ type: "ERROR", payload: error });
     }
@@ -27,7 +27,7 @@ export const getMyself = () => async (dispatch) => {
             }
         )
 
-        return dispatch({ type: GET_USER, payload: User.data });
+        return dispatch({ type: SELF, payload: User.data });
     } catch (error) {
         return dispatch({ type: "ERROR", payload: error });
     }
