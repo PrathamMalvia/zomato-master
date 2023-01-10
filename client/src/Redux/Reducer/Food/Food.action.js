@@ -8,7 +8,7 @@ export const getFood = (foodId) => async (dispatch) => {
         const Food = await axios(
             {
                 method: "GET",
-                url: `http://localhost:4000/food/${foodId}`,
+                url: `http://localhost:99/food/${foodId}`,
             }
         )
 
@@ -23,7 +23,7 @@ export const getFoodList = (menuId) => async (dispatch) => {
         const Menu = await axios(
             {
                 method: "GET",
-                url: `http://localhost:4000/menu/list/${menuId}`,
+                url: `http://localhost:99/menu/list/${menuId}`,
             }
         )
 

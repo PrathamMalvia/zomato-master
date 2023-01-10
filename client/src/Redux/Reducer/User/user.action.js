@@ -8,7 +8,7 @@ export const getUser = (_id) => async (dispatch) => {
         const User = await axios(
             {
                 method: "GET",
-                url: `http://localhost:4000/user/${_id}`,
+                url: `http://localhost:99/user/${_id}`,
             }
         )
 
@@ -23,7 +23,7 @@ export const getMyself = () => async (dispatch) => {
         const User = await axios(
             {
                 method: "GET",
-                url: `http://localhost:4000/user`,
+                url: `http://localhost:99/user`,
             }
         )
 
@@ -39,7 +39,7 @@ export const getMyself = () => async (dispatch) => {
         const User = await axios(
             {
                 method: "GET",
-                url: `http://localhost:4000/user/${_id}`,
+                url: `http://localhost:99/user/${_id}`,
             }
         )
 

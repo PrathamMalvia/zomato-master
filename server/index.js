@@ -61,7 +61,7 @@ zomato.use("/mail", MailService);
 
 zomato.get("/", (req, res) => res.json({ message: "SetUp Success" }));
 
-zomato.listen(4000, () =>
+zomato.listen(99, () =>
   ConnectDB()
     .then(() => console.log("Server is running 🚀"))
     .catch(() => console.log("Server is running, but database connection failed..."))

@@ -31,6 +31,8 @@ export default function SignUp({ isOpen, setIsOpen }) {
         dispatch(signUp(userData))
     };
 
+    const googleSignup = () => window.location.href = "http://localhost:99/auth/google"
+
     return (
         <>
             <Transition appear show={isOpen} as={Fragment}>
@@ -66,7 +68,9 @@ export default function SignUp({ isOpen, setIsOpen }) {
 
                                     </Dialog.Title>
                                     <div className="mt-2 flex flex-col gap-3 w-full">
-                                        <button className='flex justify-center items-center gap-2 py-2 rounded-lg w-full border border-gray-400 bg-white text-gray-700 hover:bg-gray-100'>
+                                        <button
+                                            onClick={googleSignup}
+                                            className='flex justify-center items-center gap-2 py-2 rounded-lg w-full border border-gray-400 bg-white text-gray-700 hover:bg-gray-100'>
                                             Sign up With Google <FcGoogle />
                                         </button>
 
