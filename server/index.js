@@ -52,7 +52,7 @@ routeConfig(passport);
 zomato.use("/auth", Auth);
 zomato.use("/restaurants", Restaurant);
 zomato.use("/food", Food);
-zomato.use("/menu", Menu);
+zomato.use("/menu", Menu);  
 zomato.use("/images", Image);
 zomato.use("/orders", Order);
 zomato.use("/reviews", Review);

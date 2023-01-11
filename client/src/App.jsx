@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import axios from "axios";
 
@@ -20,6 +21,10 @@ import Photos from "./Pages/Restaurant/Photos";
 import Checkout from "./Pages/Checkout";
 import RedirectRestaurant from "./Pages/Restaurant/Redirect";
 import GoogleAuth from "./Pages/GoogleAuth";
+import { useDispatch, useSelector } from "react-redux";
+
+// redux actions
+import { getMyself } from "./Redux/Reducer/User/user.action";
 
 // axios global settings
 if (localStorage.zomatoUser) {
@@ -29,6 +34,12 @@ if (localStorage.zomatoUser) {
 
 
 function App() {
+  const dispatch = useDispatch(); 
+
+    useEffect(() => {
+      if (localStorage.zomatoUser) dispatch(getMyself());
+    }, [])
+
   return (
     <>
       <Route path="/" exact>
@@ -44,7 +55,7 @@ function App() {
         exact
         component={GoogleAuth}
       />
-      
+
       <RestaurantLayoutHOC
         path="/restaurant/:id/overview"
         exact
