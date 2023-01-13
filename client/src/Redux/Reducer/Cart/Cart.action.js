@@ -1,14 +1,15 @@
 import axios from "axios";
 
 // redux types
-import { GET_CART, ADD_CART, UPDATE_CART, DELETE_CART, INCREMENT_QTY, DECREMENT_QTY } from "./Cart.type";
+import { GET_CART, ADD_CART, DELETE_CART, INCREMENT_QTY, DECREMENT_QTY } from "./Cart.type";
 
 export const getCart = () => async (dispatch) => {
     try {
         let cartData = { cart: [] };
 
         if (localStorage.zomatoCart) {
-            cartData.cart = JSON.psrse(localStorage.getItem("zomatoCart"))
+            const { cart } = JSON.psrse(localStorage.getItem("zomatoCart"))
+            cartData.cart = cart;
         }
 
         return dispatch({ type: GET_CART, payload: cartData.cart });
@@ -22,7 +23,8 @@ export const addCart = (newFood) => async (dispatch) => {
         let cartData = { cart: [] };
 
         if (localStorage.zomatoCart) {
-            cartData.cart = JSON.parse(localStorage.getItem("zomatoCart"))
+            const { cart } = JSON.psrse(localStorage.getItem("zomatoCart"))
+            cartData.cart = cart;
         }
 
         cartData.cart.push(newFood);
@@ -39,7 +41,8 @@ export const deleteCart = (foodID) => async (dispatch) => {
         let cartData = { cart: [] };
 
         if (localStorage.zomatoCart) {
-            cartData.cart = JSON.parse(localStorage.getItem("zomatoCart"))
+            const { cart } = JSON.psrse(localStorage.getItem("zomatoCart"))
+            cartData.cart = cart;
         }
 
         if (!cartData.cart.length) {
@@ -50,7 +53,7 @@ export const deleteCart = (foodID) => async (dispatch) => {
 
         localStorage.setItem("zomatoCart", JSON.stringify({ cart: cartData.cart }))
 
-        return dispatch({ type: ADD_CART, payload: cartData.cart });
+        return dispatch({ type: DELETE_CART, payload: cartData.cart });
     } catch (error) {
         return dispatch({ type: "ERROR", payload: error });
     }
@@ -61,13 +64,12 @@ export const IncQty = (foodID) => async (dispatch) => {
         let cartData = { cart: [] };
 
         if (localStorage.zomatoCart) {
-            cartData.cart = JSON.parse(localStorage.getItem("zomatoCart"))
+            const { cart } = JSON.psrse(localStorage.getItem("zomatoCart"))
+            cartData.cart = cart;
         }
 
-
-
         cartData.cart = cartData.cart.map((food) =>
-            food._id === foodID ? ({ ...food, quantity: food.quantity + 1 }) : food
+            food._id === foodID ? ({ ...food, quantity: food.quantity + 1, totalPrice: food.price * (food.quantity + 1) }) : food
         )
 
         localStorage.setItem("zomatoCart", JSON.stringify({ cart: cartData.cart }))
@@ -83,13 +85,12 @@ export const DecQty = (foodID) => async (dispatch) => {
         let cartData = { cart: [] };
 
         if (localStorage.zomatoCart) {
-            cartData.cart = JSON.parse(localStorage.getItem("zomatoCart"))
+            const { cart } = JSON.psrse(localStorage.getItem("zomatoCart"))
+            cartData.cart = cart;
         }
 
-
-
         cartData.cart = cartData.cart.map((food) =>
-            food._id === foodID ? ({ ...food, quantity: food.quantity - 1 }) : food
+            food._id === foodID ? ({ ...food, quantity: food.quantity - 1, totalPrice: food.price * (food.quantity - 1) }) : food
         )
 
         localStorage.setItem("zomatoCart", JSON.stringify({ cart: cartData.cart }))
