@@ -76,43 +76,40 @@ const CartContainer = () => {
     return (
         <>
             {
-                isOpen && (
-                    <div className='fixed w-full overflow-y-scroll h-48 bg-white z-10 p-2 bottom-16 px-3'>
-                        <div className='flex items-center justify-between text-xl font-semibold'>
-                            <h3>Your Orders</h3>
-                            <IoCloseSharp onClick={closeCart} />
-                        </div>
-                        <hr className='my-2' />
+                reduxState && (
+                    <>
+                        {
+                            isOpen && (
+                                <div className='fixed w-full overflow-y-scroll h-48 bg-white z-10 p-2 bottom-16 px-3'>
+                                    <div className='flex items-center justify-between text-xl font-semibold'>
+                                        <h3>Your Orders</h3>
+                                        <IoCloseSharp onClick={closeCart} />
+                                    </div>
+                                    <hr className='my-2' />
 
-                        <div className='flex flex-col gap-2 px-10'>
-                            {
-                                reduxState.map((food) => (
-                                    <FoodItem
-                                        name={food.name}
-                                        quantity={food.quantity}
-                                        price={food.price}
-                                    />
-                                ))
-                            }
-                            <FoodItem
-                                name="Pizza"
-                                quantity="3"
-                                price="300"
-                            />
+                                    <div className='flex flex-col gap-2 px-10'>
+                                        {
+                                            reduxState.map((food) => (
+                                                <FoodItem
+                                                    key={food._id}
+                                                    {...food}
+                                                />
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                            )
+
+                        }
+
+                        <div className='fixed w-full bg-white z-10 p-2 px-3 bottom-0'>
+                            <CartSm toggle={toggleCart} />
+                            <CartLg toggle={toggleCart} />
                         </div>
-                    </div>
+
+                    </>
                 )
-
             }
-
-            {
-                reduxState &&
-                <div className='fixed w-full bg-white z-10 p-2 px-3 bottom-0'>
-                    <CartSm toggle={toggleCart} />
-                    <CartLg toggle={toggleCart} />
-                </div>
-            }
-
         </>
     )
 }
