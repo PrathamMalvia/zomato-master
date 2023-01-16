@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IoMdArrowDropdown, IoMdArrowDropup, IoMdArrowDropright } from "react-icons/io"
 import { IoCloseSharp } from "react-icons/io5"
+import { useHistory } from "react-router-dom"
 
 // Components
 import FoodItem from './FoodItem'
@@ -11,6 +12,9 @@ import { getCart } from '../../Redux/Reducer/Cart/Cart.action'
 
 const CartSm = ({ toggle }) => {
     const reduxState = useSelector((global) => global.cart.cart)
+
+    const history = useHistory();
+    const continueToCheckout = () => history.push("/checkout/orders")
 
     return (
         <>
@@ -24,7 +28,9 @@ const CartSm = ({ toggle }) => {
                         <sub>(plus tax)</sub>
                     </h4>
                 </div>
-                <button className='flex items-center gap-1 bg-zomato-400 text-white px-3 py-1 rounded-lg'>
+                <button
+                    onClick={continueToCheckout}
+                    className='flex items-center gap-1 bg-zomato-400 text-white px-3 py-1 rounded-lg'>
                     Continue <IoMdArrowDropright />
                 </button>
             </div>
@@ -34,6 +40,9 @@ const CartSm = ({ toggle }) => {
 
 const CartLg = ({ toggle }) => {
     const reduxState = useSelector((global) => global.cart.cart)
+
+    const history = useHistory();
+    const continueToCheckout = () => history.push("/checkout/orders")
 
     return (
         <>
@@ -50,7 +59,9 @@ const CartLg = ({ toggle }) => {
                     <h4 className='text-xl'>
                         Subtotal : ₹ {reduxState.reduce((acc, curVal) => acc + curVal.totalPrice, 0)}
                     </h4>
-                    <button className='flex items-center text-lg h-10 font-medium gap-1 bg-zomato-400 text-white px-3 py-1 rounded-lg'>
+                    <button
+                        onClick={continueToCheckout}
+                        className='flex items-center text-lg h-10 font-medium gap-1 bg-zomato-400 text-white px-3 py-1 rounded-lg'>
                         Continue <IoMdArrowDropright />
                     </button>
                 </div>
@@ -64,7 +75,7 @@ const CartContainer = () => {
     const [cartData, setCartData] = useState([])
 
     const dispatch = useDispatch();
-    const reduxState = useSelector((global) => global.cart.cart)
+    const reduxState = useSelector((global) => global.cart.cart);
 
     useEffect(() => {
         dispatch(getCart()).then((data) => setCartData(data.payload))
