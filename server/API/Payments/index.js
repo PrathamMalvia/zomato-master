@@ -4,7 +4,7 @@ import passport from "passport";
 import RazorPay from "razorpay";
 import { v4 as uuid } from "uuid";
 // Database modal
-import { MenuModel, ImageModel } from "../../database/allModels";
+import { MenuModel, ImageModel } from "../../database/AllModals";
 
 const Router = express.Router();
 
